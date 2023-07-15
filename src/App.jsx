@@ -1,15 +1,17 @@
 import React from 'react';
 import './App.css';
+import VoltageChart from './components/VoltageChart';
+import AmperageChart from './components/AmperageChart'; 
 
 function App() {
   return (
     <div className="App">
- <header>
-  <div className="logo">
-    <img src="images/logo.png" alt="Logo" />
-  </div>
-  <h1>Sistema de Detección de Fluctuación Eléctrica</h1>
-</header>
+      <header>
+        <div className="logo">
+          <img src="images/logo.png" alt="Logo" />
+        </div>
+        <h1>Sistema de Detección de Fluctuación Eléctrica</h1>
+      </header>
 
       <main>
         <section>
@@ -28,8 +30,8 @@ function App() {
         <section>
           <h2>Gráficas</h2>
           <div id="charts">
-            <div className="chart-placeholder">Gráfica de Voltaje</div>
-            <div className="chart-placeholder">Gráfica de Amperaje</div>
+            <VoltageChart />
+            <AmperageChart />
           </div>
         </section>
       </main>
