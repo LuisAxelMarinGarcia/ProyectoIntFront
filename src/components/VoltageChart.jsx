@@ -13,8 +13,8 @@ function VoltageChart() {
         label: 'Voltaje',
         data: [],
         fill: false,
-        backgroundColor: 'rgb(75, 192, 192)',
-        borderColor: 'rgba(75, 192, 192, 0.2)',
+        backgroundColor: 'rgb(255, 159, 64)',
+        borderColor: 'rgba(255, 159, 64, 0.2)',
       },
     ],
   });
