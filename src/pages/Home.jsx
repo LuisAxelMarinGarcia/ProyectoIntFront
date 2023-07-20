@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import '../styles/home.css';
+import '../styles/Home.css';
 import VoltageChart from '../components/VoltageChart';
 import AmperageChart from '../components/AmperageChart'; 
 import Statistics from '../components/Statistics';
