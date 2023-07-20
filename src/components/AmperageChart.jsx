@@ -1,10 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import { Line } from 'react-chartjs-2';
 import { Chart, CategoryScale, LinearScale, PointElement, LineElement } from 'chart.js';
+import { AuthContext } from './AuthContext';
+import axios from 'axios';
 
 Chart.register(CategoryScale, LinearScale, PointElement, LineElement);
 
 function AmperageChart() {
   const chartRef = useRef(null);
+  const { isLoggedIn } = useContext(AuthContext);
   const [data, setData] = useState({
     labels: [],
     datasets: [
@@ -17,21 +21,40 @@ function AmperageChart() {
       },
     ],
   });
+  const [error, setError] = useState(null);
 
-  // Simular la recepción de datos del sensor
   useEffect(() => {
-    let count = 0;
-    const interval = setInterval(() => {
-      setData((prevData) => {
-        const newData = { ...prevData };
-        newData.labels.push(count++);
-        newData.datasets[0].data.push(Math.random() * 100);
-        return newData;
-      });
-    }, 1000);
+    if (!isLoggedIn) {
+      return;
+    }
 
-    return () => clearInterval(interval);
-  }, []);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://3.224.141.144/api/ampsensor/amp');
+        updateData(response.data);
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+
+    fetchData();
+  }, [isLoggedIn]);
+
+  const updateData = (newData) => {
+    setData((prevData) => {
+      const newLabels = [...prevData.labels, prevData.labels.length];
+      const newDatasets = [
+        {
+          ...prevData.datasets[0],
+          data: [...prevData.datasets[0].data, newData],
+        },
+      ];
+      return {
+        labels: newLabels,
+        datasets: newDatasets,
+      };
+    });
+  };
 
   useEffect(() => {
     if (chartRef.current) {
@@ -54,7 +77,21 @@ function AmperageChart() {
     }
   }, [data]);
 
-  return <canvas ref={chartRef} />;
+  if (!isLoggedIn) {
+    return (
+      <div className="sensor">
+        <h3>Corriente</h3>
+        <p className="placeholder">Inicia sesión para ver los datos de la gráfica</p>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      {error && <p>Error al obtener los datos: {error}</p>}
+      <Line ref={chartRef} data={data} />
+    </div>
+  );
 }
 
 export default AmperageChart;
