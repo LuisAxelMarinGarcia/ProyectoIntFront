@@ -6,31 +6,6 @@ body {
   color: #ffffff; /* Color de texto principal */
 }
 
-header {
-  background-color: #000000;
-  color: #ffffff;
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
-}
-
-.logo {
-  margin-bottom: 20px;
-}
-
-.logo img {
-  width: 100px;
-  height: auto;
-}
-
-.title {
-  font-size: 1.2em;
-  margin: 0;
-}
-
 main {
   margin: 20px;
 }

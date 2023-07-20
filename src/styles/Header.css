@@ -1,22 +1,97 @@
-        header {
-            background-color: #000000;
-            color: #ffffff;
-            padding: 20px 0;
-            text-align: center;
-            font-size: 1.5em;
-            }
-        header {
-        background-color: #000000;
-        color: #ffffff;
-        padding: 20px;
-        display: flex;
-        align-items: center;
-            }
-
-        .logo {
-        margin-right: 20px;
-            }
-        .logo img {
-        width: 200px;
-        height: auto;
-                }        
+/* Header.css */
+.header {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Cambiado de space-between a flex-start */
+    flex-wrap: wrap;
+  }
+  
+  .logo {
+    flex: 1;
+    text-align: left;
+  }
+  
+  .logo img {
+    width: 100px;
+    height: auto;
+  }
+  
+  .header-content {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Cambiado de flex-start a center */
+  }
+  
+  .title {
+    font-size: 1.5em;
+    margin: 0 20px;
+  }
+  
+  .menu-button {
+    display: block;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 2em;
+    flex: 1;
+    text-align: right;
+  }
+  
+  .menu-button.open {
+    color: #61dafb;
+  }
+  
+  .nav {
+    display: none;
+    width: 100%;
+  }
+  
+  .nav.show {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .nav ul li {
+    margin: 0 10px;
+  }
+  
+  .nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+  }
+  
+  @media (min-width: 768px) {
+    .menu-button {
+      display: none;
+    }
+  
+    .nav {
+      display: flex;
+      justify-content: flex-end;
+    }
+  
+    .nav ul {
+      justify-content: flex-end;
+      width: auto;
+    }
+  
+    /* Añadido nuevo estilo */
+    .header-content {
+      justify-content: flex-start;
+      margin-left: 20px; /* Ajusta el margen izquierdo según sea necesario */
+    }
+  }
+  
