@@ -1,16 +1,16 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './components/AuthContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import { AuthContextProvider } from './components/AuthContext';
 
 function App() {
   return (
-    <Router>
-      <AuthContextProvider> {/* Agregar el proveedor de contexto de autenticación */}
+    <AuthProvider>
+      <Router>
         <Header />
         <div>
           <Routes>
@@ -20,8 +20,8 @@ function App() {
           </Routes>
         </div>
         <Footer />
-      </AuthContextProvider> {/* Cerrar el proveedor de contexto de autenticación */}
-    </Router>
+      </Router>
+    </AuthProvider>
   );
 }
 

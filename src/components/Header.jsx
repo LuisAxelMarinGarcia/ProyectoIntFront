@@ -1,13 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from './AuthContext';
 import '../styles/Header.css';
 
 function Header() {
   const { isLoggedIn, handleLogin, handleLogout } = useContext(AuthContext);
+  const [isNavOpen, setIsNavOpen] = useState(false); // Estado para controlar la visibilidad de la barra de navegación
 
-  const toggleMenu = () => {
-    // Toggle menu logic
+  const toggleNav = () => {
+    setIsNavOpen(!isNavOpen);
   };
 
   return (
@@ -19,10 +20,10 @@ function Header() {
       </div>
       <div className="header-content">
         <center><h1 className="title">SISTEMA DE MONITOREO DE CORRIENTE Y VOLTAJE</h1></center>
-        <button onClick={toggleMenu} className="menu-button">
+        <button onClick={toggleNav} className={`menu-button ${isNavOpen ? 'open' : ''}`}>
           ☰
         </button>
-        <nav className="nav">
+        <nav className={`nav ${isNavOpen ? 'show' : ''}`}>
           <ul>
             {isLoggedIn ? (
               <li><button onClick={handleLogout}>Cerrar sesión</button></li>

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../styles/AuthForm.css';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [message, setMessage] = useState('');
+  const navigate = useNavigate(); // Obtener la función de navegación
 
   function handleLogin(e) {
     e.preventDefault();
@@ -18,12 +19,11 @@ function Login() {
 
     axios.post('http://3.224.141.144/api/auth/token', data)
       .then(response => {
-        // Manejar la respuesta exitosa
         console.log(response.data);
-        setMessage('Registro realizado con éxito!');
+        setMessage('Inicio de sesión exitoso!');
+        navigate('/'); // Redirigir al usuario a la página Home.jsx utilizando la función de navegación
       })
       .catch(error => {
-        // Manejar el error
         console.error(error);
       });
   }
